@@ -10,3 +10,5 @@ proto:
 
 build-api:
 	go build -o ./bin/api ./cmd/api
+
+build: build-api
