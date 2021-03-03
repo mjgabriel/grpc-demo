@@ -1,0 +1,9 @@
+*.pem
+*.key
+.idea
+.env
+.vscode
+.DS_Store
+bin/
+logs/
+vendor/
