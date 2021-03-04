@@ -13,6 +13,7 @@ RUN apt-get update && apt install unzip
 RUN curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v$PROTOC_VERSION/$PROTOC_ZIP
 RUN curl -LO https://github.com/protocolbuffers/protobuf-go/releases/download/$PROTOC_GEN_GO_VERSION/${PROTOGENGO_ZIP}
 RUN go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1.0
+RUN go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@v2.3.0
 
 RUN unzip $PROTOC_ZIP -d .
 RUN tar -zxvf ${PROTOGENGO_ZIP} -C ./bin

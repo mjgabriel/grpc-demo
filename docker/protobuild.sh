@@ -1,3 +1,3 @@
 #!/bin/bash
 
-protoc -I./api/proto -I./third_party --go_out=./api --go-grpc_out=./api ./api/proto/*.proto
+protoc -I./api/proto -I./third_party --go_out=./api --go-grpc_out=./api --grpc-gateway_out=./api ./api/proto/*.proto

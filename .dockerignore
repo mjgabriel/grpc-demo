@@ -1,0 +1,6 @@
+api/proto
+go.sum
+go.mod
+README.md
+docker/
+bin/
