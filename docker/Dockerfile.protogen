@@ -1,0 +1,25 @@
+FROM golang:1.16
+
+ENV PROTOC_VERSION 3.15.3
+ENV PROTOC_GEN_GO_VERSION v1.25.0
+ENV PB_REL "https://github.com/protocolbuffers/protobuf/releases"
+ENV PBGENGO_REL "https://github.com/protocolbuffers/protobuf-go/releases"
+ENV PROTOC_ZIP protoc-$PROTOC_VERSION-linux-x86_64.zip
+ENV PROTOGENGO_ZIP protoc-gen-go.$PROTOC_GEN_GO_VERSION.linux.amd64.tar.gz
+
+RUN apt-get update && apt install unzip
+
+# Fetch the compiler and plugins
+RUN curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v$PROTOC_VERSION/$PROTOC_ZIP
+RUN curl -LO https://github.com/protocolbuffers/protobuf-go/releases/download/$PROTOC_GEN_GO_VERSION/${PROTOGENGO_ZIP}
+RUN go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1.0
+
+RUN unzip $PROTOC_ZIP -d .
+RUN tar -zxvf ${PROTOGENGO_ZIP} -C ./bin
+RUN rm $PROTOGENGO_ZIP && rm $PROTOC_ZIP
+
+ADD ./protobuild.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/protobuild.sh
+
+WORKDIR /opt/src
+ENTRYPOINT [ "protobuild.sh"]
