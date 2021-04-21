@@ -16,5 +16,5 @@ build-api:
 	
 build: build-api
 
-docker-builder-protogen:
-	docker build -t "grpc-demo-protogen:Dockerfile.protogen" .
+build-protogen:
+	docker build --no-cache -t grpc-demo-protogen -f ./docker/Dockerfile.protogen ./docker
